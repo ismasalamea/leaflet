@@ -42,7 +42,7 @@ L.control.scale().addTo(map);
 
 L.geoJSON(parroquias, { onEachFeature: tooltip }).addTo(map);
 
-    L.geoJSON(centros, {onEachFeature: popup}).addTo(map);
+L.geoJSON(centros, {onEachFeature: popup}).addTo(map);
 
     //L.geoJSON(centros, { pointToLayer: PoIstile, onEachFeature: popup }) 
 //    .addTo(map);
