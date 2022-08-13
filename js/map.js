@@ -40,8 +40,8 @@ L.control.scale().addTo(map);
 // geoJSON para agregar capas desde formato JSON 
 
 
-L.geoJSON(parroquias, { onEachFeature: tooltip }) 
-    .addTo(map);
+L.geoJSON(parroquias, { onEachFeature: tooltip }).addTo(map);
+
     L.geoJSON(centros, {onEachFeature: popup}).addTo(map);
 
     //L.geoJSON(centros, { pointToLayer: PoIstile, onEachFeature: popup }) 
