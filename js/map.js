@@ -38,13 +38,14 @@ function PoIstile(feature, latlng) {
 };
 
 // geoJSON para agregar capas desde formato JSON 
-//L.geoJSON(centros).addTo(map);
+
 
 L.geoJSON(parroquias, { onEachFeature: tooltip }) 
     .addTo(map);
+    L.geoJSON(centros, {onEachFeature: popup}).addTo(map);
 
-L.geoJSON(centros, { pointToLayer: PoIstile, onEachFeature: popup }) 
-    .addTo(map);
+    //L.geoJSON(centros, { pointToLayer: PoIstile, onEachFeature: popup }) 
+//    .addTo(map);
     
 
     
@@ -53,7 +54,7 @@ function popup(feature, layer) {
     if (feature.properties && feature.properties.INSTITUCIO) 
     { 
         layer.bindPopup(
-        `<p class="display-6"><b>TIPO:</h4> ${feature.properties.TIPO} <br/>
+        `<b>TIPO:</b> ${feature.properties.TIPO} <br/>
         <b>INSTITUCION:</b> ${feature.properties.INSTITUCIO }<br/>
         <b>TELEFONO:</b> ${feature.properties.TELEFONO}<br/> 
         <b>CONTACTO:</b> ${feature.properties.CONTACTO}<br/> 
