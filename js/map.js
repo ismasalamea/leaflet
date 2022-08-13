@@ -6,6 +6,40 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 L.control.scale().addTo(map);
 
+// geoJSON para agregar capas desde formato JSON 
+
+
+L.geoJSON(parroquias, { onEachFeature: tooltip }).addTo(map);
+
+L.geoJSON(centros, {onEachFeature: popup}).addTo(map);
+    
+// Crear un popup de la entidades de la capa geoJSON
+function popup(feature, layer) { 
+    if (feature.properties && feature.properties.INSTITUCIO) 
+    { 
+        layer.bindPopup(
+        `<b>TIPO:</b> ${feature.properties.TIPO} <br/>
+        <b>INSTITUCION:</b> ${feature.properties.INSTITUCIO }<br/>
+        <b>TELEFONO:</b> ${feature.properties.TELEFONO}<br/> 
+        <b>CONTACTO:</b> ${feature.properties.CONTACTO}<br/> 
+        <b>CORREO:</b> ${feature.properties.CORREO}<br/></p>`
+        ); 
+    } 
+}
+///Crear un tooltip (label) de la entidades de la capa geoJSON
+function tooltip(feature, layer) { 
+    if (feature.properties && feature.properties.DPA_DESPAR) 
+    { 
+        layer.bindTooltip(feature.properties.DPA_DESPAR, {permanent: true, direction: "center", className: "my-labels"}); 
+    } 
+}
+
+
+
+//L.geoJSON(centros, { pointToLayer: PoIstile, onEachFeature: popup }) 
+//    .addTo(map);
+
+
 // Marker para agregar marcadores de una capa difrenciado por una capa
 
 ///////////////////////////////////////////
@@ -36,37 +70,3 @@ L.control.scale().addTo(map);
                 return L.marker(latlng, {icon: normal});     
     };       
 }*/;
-
-// geoJSON para agregar capas desde formato JSON 
-
-
-L.geoJSON(parroquias, { onEachFeature: tooltip }).addTo(map);
-
-L.geoJSON(centros, {onEachFeature: popup}).addTo(map);
-
-    //L.geoJSON(centros, { pointToLayer: PoIstile, onEachFeature: popup }) 
-//    .addTo(map);
-    
-
-    
-// Crear un popup de la entidades de la capa geoJSON
-function popup(feature, layer) { 
-    if (feature.properties && feature.properties.INSTITUCIO) 
-    { 
-        layer.bindPopup(
-        `<b>TIPO:</b> ${feature.properties.TIPO} <br/>
-        <b>INSTITUCION:</b> ${feature.properties.INSTITUCIO }<br/>
-        <b>TELEFONO:</b> ${feature.properties.TELEFONO}<br/> 
-        <b>CONTACTO:</b> ${feature.properties.CONTACTO}<br/> 
-        <b>CORREO:</b> ${feature.properties.CORREO}<br/></p>`
-        ); 
-    } 
-}
-///Crear un tooltip (label) de la entidades de la capa geoJSON
-function tooltip(feature, layer) { 
-    if (feature.properties && feature.properties.DPA_DESPAR) 
-    { 
-        layer.bindTooltip(feature.properties.DPA_DESPAR, {permanent: true, direction: "center", className: "my-labels"}); 
-    } 
-}
-
