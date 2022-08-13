@@ -6,23 +6,46 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 L.control.scale().addTo(map);
 
-// Marker para agregar marcadores de una capa
-L.marker([-2.8866116,-78.9856034]).addTo(map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+// Marker para agregar marcadores de una capa difrenciado por una capa
+
 ///////////////////////////////////////////
+function PoIstile(feature, latlng) {
+    switch(feature.properties["TIPO"]) 
+    {
+        case "Personas adultas mayores":
+            var fontanaIcon = new L.AwesomeMarkers.icon({
+                icon: 'star',
+                markerColor: 'blue',
+                className: 'awesome-marker'
+              });
+                return L.marker(latlng, {icon: fontanaIcon});
+    
+        case "Servicios para toda la poblacion":
+            var chiesaIcon = new L.AwesomeMarkers.icon({
+                icon: 'glass',
+                markerColor: 'green',
+                className: 'awesome-marker'
+              });    
+                return L.marker(latlng, {icon: chiesaIcon});     
+        default:         
+            var normal = new L.AwesomeMarkers.icon({
+                icon: 'flag',
+                markerColor: 'orange',
+                className: 'awesome-marker'
+            });    
+                return L.marker(latlng, {icon: normal});     
+    };       
+};
 
 // geoJSON para agregar capas desde formato JSON 
-L.geoJSON(parroquias).addTo(map);
-L.geoJSON(centros).addTo(map);
-
-///////////////////////
-
+//L.geoJSON(centros).addTo(map);
 
 L.geoJSON(parroquias, { onEachFeature: tooltip }) 
     .addTo(map);
 
-L.geoJSON(centros, { onEachFeature: popup }) 
+L.geoJSON(centros, { pointToLayer: PoIstile, onEachFeature: popup }) 
     .addTo(map);
+    
 
     
 // Crear un popup de la entidades de la capa geoJSON
@@ -30,11 +53,11 @@ function popup(feature, layer) {
     if (feature.properties && feature.properties.INSTITUCIO) 
     { 
         layer.bindPopup(
-        "<B>TIPO:</B> " + feature.properties.TIPO + "<br/>" +
-        "<B>INSTITUCION:</B> " + feature.properties.INSTITUCIO + "<br/>" + 
-        "<B>TELEFONO:</B> " + feature.properties.TELEFONO + "<br/>" + 
-        "<B>CONTACTO:</B> " + feature.properties.CONTACTO + "<br/>" + 
-        "<B>CORREO:</B> " + feature.properties.CORREO + "<br/>" 
+        `<p class="display-6"><b>TIPO:</h4> ${feature.properties.TIPO} <br/>
+        <b>INSTITUCION:</b> ${feature.properties.INSTITUCIO }<br/>
+        <b>TELEFONO:</b> ${feature.properties.TELEFONO}<br/> 
+        <b>CONTACTO:</b> ${feature.properties.CONTACTO}<br/> 
+        <b>CORREO:</b> ${feature.properties.CORREO}<br/></p>`
         ); 
     } 
 }

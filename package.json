@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "geojson": "^0.5.0"
+    "bootstrap-icons": "^1.9.1",
+    "geojson": "^0.5.0",
+    "leaflet.awesome-markers": "^2.0.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
