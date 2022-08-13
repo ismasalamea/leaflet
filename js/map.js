@@ -9,7 +9,7 @@ L.control.scale().addTo(map);
 // Marker para agregar marcadores de una capa difrenciado por una capa
 
 ///////////////////////////////////////////
-function PoIstile(feature, latlng) {
+/*function PoIstile(feature, latlng) {
     switch(feature.properties["TIPO"]) 
     {
         case "Personas adultas mayores":
@@ -35,7 +35,7 @@ function PoIstile(feature, latlng) {
             });    
                 return L.marker(latlng, {icon: normal});     
     };       
-};
+}*/;
 
 // geoJSON para agregar capas desde formato JSON 
 
